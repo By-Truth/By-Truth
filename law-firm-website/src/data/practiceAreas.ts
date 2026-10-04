@@ -4,78 +4,55 @@ import { images } from "./images";
 /**
  * Practice areas.
  *
- * Replace each placeholder with one of the firm's actual practice areas.
- * When a real name is supplied, update the `slug` to match it
- * (e.g. "corporate-commercial-law") — the slug becomes the page URL.
- * Exactly one entry should have `featured: true`.
+ * The firm practises commercial law and legal consultation. The `services`
+ * lists below describe matters typically handled within each area — confirm
+ * them with the firm and remove anything it does not offer.
+ *
+ * The `slug` becomes the page URL. Exactly one entry should have
+ * `featured: true`. To add a practice area, append another entry.
  */
 export const practiceAreas: PracticeArea[] = [
   {
-    slug: "practice-area-1",
-    name: "[Practice Area 1]",
-    summary: "[Short description of this practice area — one or two sentences.]",
+    slug: "commercial-law",
+    name: "Commercial Law",
+    summary:
+      "Strategic legal advice for businesses, transactions, corporate governance and commercial relationships.",
     overview: [
-      "[Introduction to this practice area — the legal issues it covers and the clients it serves. To be supplied by the firm.]",
-      "[How the firm approaches matters in this area. To be supplied by the firm.]",
+      "Our commercial law practice supports individuals, businesses and institutions in structuring, documenting and protecting their commercial interests in Nigeria.",
+      "We advise on the legal aspects of day-to-day business operations as well as significant transactions, with attention to commercial objectives, risk and regulatory requirements.",
+      "[Additional detail about the firm's commercial practice — sectors served and approach. To be supplied by the firm.]",
     ],
-    services: ["[Service or matter type]", "[Service or matter type]", "[Service or matter type]"],
+    services: [
+      "Drafting, review and negotiation of commercial contracts",
+      "Business formation and registration with the Corporate Affairs Commission",
+      "Corporate governance and company secretarial matters",
+      "Commercial transactions and joint ventures",
+      "Regulatory compliance for businesses",
+      "Resolution of commercial disputes",
+    ],
     icon: "briefcase",
     image: images.documentSigning,
     featured: true,
   },
   {
-    slug: "practice-area-2",
-    name: "[Practice Area 2]",
-    summary: "[Short description of this practice area — one or two sentences.]",
+    slug: "legal-consultation",
+    name: "Legal Consultation & Advisory",
+    summary:
+      "Clear, practical legal advice to help clients understand their position and make informed decisions.",
     overview: [
-      "[Introduction to this practice area — the legal issues it covers and the clients it serves. To be supplied by the firm.]",
+      "Our consultation service gives individuals, businesses and institutions access to considered legal advice on the issues they face — before decisions are made and before problems escalate.",
+      "We take time to understand each matter, explain the relevant legal position in plain terms and set out the practical options available.",
+      "[Additional detail about how consultations are arranged and conducted. To be supplied by the firm.]",
     ],
-    services: ["[Service or matter type]", "[Service or matter type]", "[Service or matter type]"],
-    icon: "document",
-    image: images.workspaceReview,
-  },
-  {
-    slug: "practice-area-3",
-    name: "[Practice Area 3]",
-    summary: "[Short description of this practice area — one or two sentences.]",
-    overview: [
-      "[Introduction to this practice area — the legal issues it covers and the clients it serves. To be supplied by the firm.]",
+    services: [
+      "Legal opinions on specific questions of law",
+      "Review of documents before signing",
+      "Advice on rights, obligations and available options",
+      "Legal risk assessment for decisions and projects",
+      "Ongoing advisory support for businesses",
+      "Consultations in person, by phone or by video",
     ],
-    services: ["[Service or matter type]", "[Service or matter type]", "[Service or matter type]"],
-    icon: "building",
-    image: images.glassFacade,
-  },
-  {
-    slug: "practice-area-4",
-    name: "[Practice Area 4]",
-    summary: "[Short description of this practice area — one or two sentences.]",
-    overview: [
-      "[Introduction to this practice area — the legal issues it covers and the clients it serves. To be supplied by the firm.]",
-    ],
-    services: ["[Service or matter type]", "[Service or matter type]", "[Service or matter type]"],
-    icon: "shield",
+    icon: "compass",
     image: images.conferenceRoom,
-  },
-  {
-    slug: "practice-area-5",
-    name: "[Practice Area 5]",
-    summary: "[Short description of this practice area — one or two sentences.]",
-    overview: [
-      "[Introduction to this practice area — the legal issues it covers and the clients it serves. To be supplied by the firm.]",
-    ],
-    services: ["[Service or matter type]", "[Service or matter type]", "[Service or matter type]"],
-    icon: "users",
-    image: images.teamDiscussion,
-  },
-  {
-    slug: "practice-area-6",
-    name: "[Practice Area 6]",
-    summary: "[Short description of this practice area — one or two sentences.]",
-    overview: [
-      "[Introduction to this practice area — the legal issues it covers and the clients it serves. To be supplied by the firm.]",
-    ],
-    services: ["[Service or matter type]", "[Service or matter type]", "[Service or matter type]"],
-    icon: "globe",
-    image: images.towersMonochrome,
   },
 ];

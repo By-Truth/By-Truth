@@ -17,7 +17,7 @@ export const attorneys: Attorney[] = [
     slug: "team-member-1",
     name: "[Lawyer Full Name]",
     position: "[Position]",
-    practiceAreaSlugs: ["practice-area-1", "practice-area-2"],
+    practiceAreaSlugs: ["commercial-law", "legal-consultation"],
     shortBio: "[Short biography — two or three sentences. To be supplied.]",
     biography: [
       "[Full biography — professional background and areas of focus. To be supplied by the lawyer.]",
@@ -33,7 +33,7 @@ export const attorneys: Attorney[] = [
     slug: "team-member-2",
     name: "[Lawyer Full Name]",
     position: "[Position]",
-    practiceAreaSlugs: ["practice-area-3", "practice-area-4"],
+    practiceAreaSlugs: ["commercial-law"],
     shortBio: "[Short biography — two or three sentences. To be supplied.]",
     biography: [
       "[Full biography — professional background and areas of focus. To be supplied by the lawyer.]",
@@ -48,7 +48,7 @@ export const attorneys: Attorney[] = [
     slug: "team-member-3",
     name: "[Lawyer Full Name]",
     position: "[Position]",
-    practiceAreaSlugs: ["practice-area-5", "practice-area-6"],
+    practiceAreaSlugs: ["legal-consultation"],
     shortBio: "[Short biography — two or three sentences. To be supplied.]",
     biography: [
       "[Full biography — professional background and areas of focus. To be supplied by the lawyer.]",

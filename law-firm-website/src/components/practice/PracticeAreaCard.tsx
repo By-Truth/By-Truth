@@ -32,3 +32,10 @@ export function PracticeAreaCard({ area, index }: { area: PracticeArea; index: n
     </Link>
   );
 }
+
+/** Grid columns that suit the number of practice areas (no empty cells for 2 or 4). */
+export function practiceGridClasses(count: number): string {
+  if (count === 1) return "";
+  if (count === 2 || count === 4) return "sm:grid-cols-2";
+  return "sm:grid-cols-2 lg:grid-cols-3";
+}

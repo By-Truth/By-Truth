@@ -14,7 +14,7 @@ export const site: SiteConfig = {
   legalName: "[LAW FIRM NAME]",
   tagline: "[TAGLINE]",
   description:
-    "[LAW FIRM NAME] provides professional legal services to individuals, businesses and institutions, delivering thoughtful counsel and strategic representation across Nigeria.",
+    "[LAW FIRM NAME] is a commercial law and legal consultation firm providing professional legal services to individuals, businesses and institutions across Nigeria.",
   address: {
     street: "[FULL OFFICE ADDRESS]",
     city: "[CITY]",

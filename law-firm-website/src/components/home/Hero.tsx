@@ -21,7 +21,7 @@ export function Hero() {
       <div aria-hidden="true" className="absolute inset-y-0 left-0 -z-10 w-full bg-gradient-to-r from-navy/80 to-transparent md:w-2/3" />
 
       <Container size="wide" className="pt-40 pb-16 sm:pb-24 lg:pb-28">
-        <p className="eyebrow enter mb-8 text-gold">{site.tagline}</p>
+        <p className="eyebrow enter mb-8 text-gold">Commercial Law &amp; Legal Consultation</p>
         <h1 id="hero-heading" className="display-1 enter enter-delay-1 max-w-5xl">
           Trusted Legal Counsel.
           <span className="block text-white/90 italic">Strategic Representation.</span>

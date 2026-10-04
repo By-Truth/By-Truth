@@ -2,7 +2,7 @@ import type { PracticeArea } from "@/types/content";
 import { ArrowLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { PracticeAreaCard } from "@/components/practice/PracticeAreaCard";
+import { PracticeAreaCard, practiceGridClasses } from "@/components/practice/PracticeAreaCard";
 
 export function PracticeAreasSection({ areas }: { areas: PracticeArea[] }) {
   return (
@@ -21,7 +21,7 @@ export function PracticeAreasSection({ areas }: { areas: PracticeArea[] }) {
         </div>
 
         {areas.length > 0 ? (
-          <ul className="reveal mt-16 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+          <ul className={`reveal mt-16 grid gap-px border border-line bg-line ${practiceGridClasses(areas.length)}`}>
             {areas.map((area, index) => (
               <li key={area.slug}>
                 <PracticeAreaCard area={area} index={index} />

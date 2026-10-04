@@ -25,7 +25,8 @@ export async function Footer() {
         <div className="grid gap-14 md:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
             <Logo />
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/65">{site.description}</p>
+            <p className="mt-6 font-serif text-xl text-gold-light italic">{site.tagline}</p>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65">{site.description}</p>
             <div className="mt-8">
               <p className="mb-4 text-[0.7rem] font-semibold tracking-[0.22em] text-white/50 uppercase">Follow Us</p>
               {socialLinks.length > 0 ? (

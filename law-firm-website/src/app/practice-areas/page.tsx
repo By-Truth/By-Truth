@@ -4,7 +4,7 @@ import { images } from "@/data/images";
 import { getPracticeAreas } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 import { ConsultationCta } from "@/components/home/ConsultationCta";
-import { PracticeAreaCard } from "@/components/practice/PracticeAreaCard";
+import { PracticeAreaCard, practiceGridClasses } from "@/components/practice/PracticeAreaCard";
 import { Container } from "@/components/ui/Container";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { PageHero } from "@/components/ui/PageHero";
@@ -30,7 +30,7 @@ export default async function PracticeAreasPage() {
       <section aria-label="All practice areas" className="bg-ivory-200 py-20 sm:py-28">
         <Container size="wide">
           {areas.length > 0 ? (
-            <ul className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+            <ul className={`grid gap-px border border-line bg-line ${practiceGridClasses(areas.length)}`}>
               {areas.map((area, index) => (
                 <li key={area.slug}>
                   <PracticeAreaCard area={area} index={index} />
