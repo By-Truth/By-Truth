@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+/* -------------------------------------------------------------------------
+   Design tokens
+   ------------------------------------------------------------------------- */
+@theme {
+  --color-navy: #0b1628;
+  --color-navy-950: #070e1a;
+  --color-navy-800: #12223a;
+  --color-navy-700: #1b2d4a;
+  --color-charcoal: #171717;
+  --color-ivory: #f7f5f0;
+  --color-ivory-200: #efebe2;
+  --color-line: #ddd6c8;
+  --color-gold: #b89b5e;
+  --color-gold-light: #cfb784;
+  /* Darker gold for small text on light backgrounds (WCAG AA). */
+  --color-gold-deep: #7a6232;
+  --color-slate: #555c6b;
+  --color-success: #2f6b4f;
+  --color-danger: #9b2c2c;
+
+  --font-serif: var(--font-cormorant), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ease-elegant: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  --animate-fade-up: fade-up 0.9s var(--ease-elegant) both;
+  --animate-fade-in: fade-in 1.2s var(--ease-elegant) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-ivory font-sans text-charcoal;
+    font-feature-settings: "kern", "liga";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif font-medium text-balance;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-navy;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  /* Anchor targets clear the fixed header. */
+  [id] {
+    scroll-margin-top: 7rem;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Components
+   ------------------------------------------------------------------------- */
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-sans text-[0.72rem] font-semibold tracking-[0.22em] uppercase;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply block h-px w-8 bg-current opacity-70;
+  }
+
+  .display-1 {
+    @apply font-serif text-[2.75rem] leading-[1.02] font-medium sm:text-6xl lg:text-7xl xl:text-[5.25rem];
+  }
+  .display-2 {
+    @apply font-serif text-[2.25rem] leading-[1.08] font-medium sm:text-5xl lg:text-[3.5rem];
+  }
+  .display-3 {
+    @apply font-serif text-[1.85rem] leading-[1.12] font-medium sm:text-4xl;
+  }
+
+  .lead {
+    @apply text-base leading-relaxed sm:text-lg sm:leading-[1.75];
+  }
+
+  /* Underline that grows on hover — used on text links. */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s var(--ease-elegant);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Long-form article typography. */
+  .prose-article {
+    @apply text-[1.0625rem] leading-[1.85] text-charcoal/90;
+  }
+  .prose-article > * + * {
+    @apply mt-6;
+  }
+  .prose-article h2 {
+    @apply mt-14 font-serif text-3xl leading-tight text-navy;
+  }
+  .prose-article h3 {
+    @apply mt-10 font-serif text-2xl leading-snug text-navy;
+  }
+  .prose-article ul {
+    @apply list-none space-y-3 pl-0;
+  }
+  .prose-article li {
+    @apply relative pl-7;
+  }
+  .prose-article li::before {
+    content: "";
+    @apply absolute top-[0.8em] left-0 h-px w-4 bg-gold;
+  }
+  .prose-article blockquote {
+    @apply my-10 border-l-2 border-gold pl-6 font-serif text-2xl leading-snug text-navy italic sm:text-[1.75rem];
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Motion — subtle, fast, and fully disabled for reduced-motion users.
+   Scroll reveals use CSS scroll-driven animations (no JavaScript). Browsers
+   without support simply show the content.
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+    .reveal-image {
+      animation: image-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+
+  .enter {
+    animation: var(--animate-fade-up);
+  }
+  .enter-delay-1 {
+    animation-delay: 120ms;
+  }
+  .enter-delay-2 {
+    animation-delay: 240ms;
+  }
+  .enter-delay-3 {
+    animation-delay: 360ms;
+  }
+
+  @keyframes image-reveal {
+    from {
+      clip-path: inset(8% 8% 8% 8%);
+      opacity: 0.4;
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+      opacity: 1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
