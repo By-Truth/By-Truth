@@ -44,6 +44,11 @@ function query(string $sql, array $params = []): PDOStatement
     return $stmt;
 }
 
+function brand(): string
+{
+    return (string) config('app_name', 'Linkora');
+}
+
 // ---------------------------------------------------------------- http
 
 function e($value): string
@@ -67,7 +72,7 @@ function url(string $path = '/'): string
     return base_url() . '/' . ltrim($path, '/');
 }
 
-/** Display form of the site host, e.g. "linkora.app". */
+/** Display form of the site host, e.g. "yourbrand.com". */
 function site_host(): string
 {
     return (string) parse_url(base_url(), PHP_URL_HOST) . (parse_url(base_url(), PHP_URL_PORT) ? ':' . parse_url(base_url(), PHP_URL_PORT) : '');
@@ -256,7 +261,7 @@ function validate_username(string $username, ?int $ignoreUserId = null): ?string
     if (!preg_match('/^[a-z0-9_]{3,30}$/', $username)) {
         return 'Usernames are 3–30 characters: lowercase letters, numbers and underscores.';
     }
-    if (in_array($username, RESERVED_USERNAMES, true)) {
+    if (in_array($username, RESERVED_USERNAMES, true) || $username === strtolower(preg_replace('/[^A-Za-z0-9_]/', '', brand()))) {
         return 'That username is reserved. Try another one.';
     }
     $taken = query('SELECT id FROM users WHERE username = ?', [$username])->fetchColumn();

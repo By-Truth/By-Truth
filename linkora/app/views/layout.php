@@ -14,7 +14,7 @@ if (!empty($user['is_admin'])) {
 <!doctype html>
 <html lang="en">
 <head>
-    <?php partial('head', ['title' => $title ?? 'Linkora']); ?>
+    <?php partial('head', ['title' => $title ?? brand()]); ?>
     <meta name="robots" content="noindex">
 </head>
 <body class="app">

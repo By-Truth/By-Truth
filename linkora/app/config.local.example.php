@@ -1,6 +1,8 @@
 <?php
 // Copy to config.local.php and fill in. config.local.php is git-ignored.
 return [
+    'app_name' => 'Linkora',
+    'tagline'  => 'One link, your whole world',
     'base_url' => 'https://your-domain.com',
     'db' => [
         'host' => '127.0.0.1',

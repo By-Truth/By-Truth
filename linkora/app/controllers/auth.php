@@ -4,7 +4,7 @@ declare(strict_types=1);
 function home(): void
 {
     render('home', [
-        'title' => 'Linkora — One link, your whole world',
+        'title' => brand() . ' — ' . config('tagline'),
         'user'  => current_user(),
     ], 'layout_marketing');
 }
@@ -16,7 +16,7 @@ function register_form(): void
     }
     $username = strtolower(preg_replace('/[^A-Za-z0-9_]/', '', $_GET['username'] ?? ''));
     render('auth/register', [
-        'title'    => 'Create your Linkora',
+        'title'    => 'Create your ' . brand(),
         'username' => old('username', $username),
         'email'    => old('email'),
         'errors'   => $_SESSION['errors'] ?? [],
@@ -56,7 +56,7 @@ function register(): void
     );
     $user = query('SELECT * FROM users WHERE id = ?', [db()->lastInsertId()])->fetch();
     login_user($user);
-    flash('success', 'Welcome to Linkora! Add your first link below.');
+    flash('success', 'Welcome to ' . brand() . '! Add your first link below.');
     redirect('/dashboard');
 }
 
@@ -66,7 +66,7 @@ function login_form(): void
         redirect('/dashboard');
     }
     render('auth/login', [
-        'title' => 'Log in — Linkora',
+        'title' => 'Log in — ' . brand(),
         'login' => old('login'),
         'error' => $_SESSION['errors']['login'] ?? null,
     ], 'layout_auth');

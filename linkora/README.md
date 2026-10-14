@@ -94,6 +94,17 @@ database/schema.sql
 public/             web root: index.php (router), assets, uploads
 ```
 
+## Renaming the brand
+
+The name and tagline are settings, not hard-coded text. To rename the site, set them in `app/config.local.php`:
+
+```php
+'app_name' => 'YourBrand',
+'tagline'  => 'One link, your whole world',
+```
+
+Or set the `APP_NAME` environment variable. The logo, page titles, "Made with …" footer and session cookie all follow it.
+
 ## Adding a theme
 
 Add an entry to `themes()` in `app/themes.php`, using the same variables as the other themes. It appears automatically on the landing page, in the theme picker and on profiles. Set `'pro' => true` to make it a Pro theme.

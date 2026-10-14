@@ -3,14 +3,14 @@
 $name = display_name($owner);
 $avatar = avatar_url($owner);
 $pageUrl = profile_url($owner);
-$desc = $owner['bio'] !== '' ? $owner['bio'] : $name . ' on Linkora';
+$desc = $owner['bio'] !== '' ? $owner['bio'] : $name . ' on ' . brand();
 ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= e($name) ?> | Linkora</title>
+    <title><?= e($name) ?> | <?= e(brand()) ?></title>
     <meta name="description" content="<?= e($desc) ?>">
     <link rel="canonical" href="<?= e($pageUrl) ?>">
     <meta property="og:title" content="<?= e($name) ?>">
@@ -52,7 +52,7 @@ $desc = $owner['bio'] !== '' ? $owner['bio'] : $name . ' on Linkora';
 
     <?php if (!$pro): ?>
         <footer class="brand">
-            <a href="<?= url('/') ?>"<?= $preview ? ' target="_blank"' : '' ?>>Made with <strong>Linkora</strong></a>
+            <a href="<?= url('/') ?>"<?= $preview ? ' target="_blank"' : '' ?>>Made with <strong><?= e(brand()) ?></strong></a>
         </footer>
     <?php endif; ?>
 </main>

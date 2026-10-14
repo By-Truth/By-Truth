@@ -14,5 +14,5 @@
         </div>
         <button class="btn btn-dark btn-block btn-lg" type="submit">Log in</button>
     </form>
-    <p class="auth-switch">New here? <a href="<?= url('register') ?>">Create your Linkora</a></p>
+    <p class="auth-switch">New here? <a href="<?= url('register') ?>">Create your <?= e(brand()) ?></a></p>
 </div>

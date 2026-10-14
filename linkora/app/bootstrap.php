@@ -17,7 +17,7 @@ ini_set('display_errors', config('debug') ? '1' : '0');
 if (PHP_SAPI !== 'cli') {
     $secure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
         || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
-    session_name('linkora_session');
+    session_name(preg_replace('/[^a-z0-9]/', '', strtolower(brand())) . '_session');
     session_set_cookie_params([
         'lifetime' => 0,
         'path'     => '/',

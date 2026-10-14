@@ -6,8 +6,10 @@
  */
 
 $config = [
-    'app_name' => 'Linkora',
-    // Public URL without a trailing slash, e.g. https://linkora.app
+    // Brand name shown across the site. Change it here (or in config.local.php).
+    'app_name' => getenv('APP_NAME') ?: 'Linkora',
+    'tagline'  => 'One link, your whole world',
+    // Public URL without a trailing slash, e.g. https://yourbrand.com
     // Leave empty to derive it from the current request.
     'base_url' => getenv('APP_URL') ?: '',
     'debug'    => getenv('APP_DEBUG') === '1',

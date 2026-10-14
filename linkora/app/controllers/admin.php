@@ -44,7 +44,7 @@ function admin_index(): void
     )->fetchAll();
 
     render('admin/index', [
-        'title'    => 'Admin — Linkora',
+        'title'    => 'Admin — ' . brand(),
         'active'   => 'admin',
         'user'     => $admin,
         'users'    => $users,

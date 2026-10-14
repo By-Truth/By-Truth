@@ -2,7 +2,7 @@
 <div class="page-head">
     <div>
         <h1>Admin</h1>
-        <p class="muted">Everything happening on Linkora.</p>
+        <p class="muted">Everything happening on <?= e(brand()) ?>.</p>
     </div>
 </div>
 

@@ -1,4 +1,4 @@
-// Linkora — small progressive enhancements. Everything works without JS.
+// Small progressive enhancements. Everything works without JS.
 (function () {
     'use strict';
 

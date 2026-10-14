@@ -1,5 +1,5 @@
 <div class="card auth-card">
-    <h1>Create your Linkora</h1>
+    <h1>Create your <?= e(brand()) ?></h1>
     <p class="muted">Free forever. Takes about a minute.</p>
     <form method="post" action="<?= url('register') ?>" class="form" novalidate>
         <?= csrf_field() ?>

@@ -5,7 +5,7 @@ $price = money((int) config('paystack.pro_price'), (string) config('paystack.cur
 <div class="page-head">
     <div>
         <h1>Your plan</h1>
-        <p class="muted"><?= $pro ? 'You’re on Pro — thank you for supporting Linkora.' : 'You’re on the Free plan.' ?></p>
+        <p class="muted"><?= $pro ? 'You’re on Pro — thank you for supporting ' . e(brand()) . '.' : 'You’re on the Free plan.' ?></p>
     </div>
 </div>
 
@@ -25,7 +25,7 @@ $price = money((int) config('paystack.pro_price'), (string) config('paystack.cur
         <ul class="checklist">
             <li><?= icon('check') ?>All premium themes</li>
             <li><?= icon('check') ?>90-day analytics</li>
-            <li><?= icon('check') ?>No Linkora branding</li>
+            <li><?= icon('check') ?>No <?= e(brand()) ?> branding</li>
         </ul>
         <?php if ($pro): ?>
             <p class="muted">Active until <strong><?= date('M j, Y', strtotime($user['pro_until'])) ?></strong>.</p>

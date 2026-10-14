@@ -65,7 +65,7 @@
                 <?php endforeach; ?>
             </div>
             <?php if (!$pro): ?>
-                <p class="upsell"><?= icon('star') ?> Unlock every theme and remove Linkora branding with <a href="<?= url('dashboard/billing') ?>">Pro</a>.</p>
+                <p class="upsell"><?= icon('star') ?> Unlock every theme and remove <?= e(brand()) ?> branding with <a href="<?= url('dashboard/billing') ?>">Pro</a>.</p>
             <?php endif; ?>
         </div>
     </section>

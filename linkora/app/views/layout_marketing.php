@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <?php partial('head', ['title' => $title ?? 'Linkora']); ?>
-    <meta property="og:title" content="Linkora — One link, your whole world">
+    <?php partial('head', ['title' => $title ?? brand()]); ?>
+    <meta property="og:title" content="<?= e(brand()) ?> — <?= e(config('tagline')) ?>">
     <meta property="og:description" content="Create a beautiful link-in-bio page in minutes. Add your links, pick a theme, share it anywhere.">
     <meta property="og:type" content="website">
 </head>
@@ -30,8 +30,8 @@
 <footer class="site-footer">
     <div class="container site-footer-inner">
         <?php partial('logo'); ?>
-        <p>One link, your whole world.</p>
-        <p class="muted">&copy; <?= date('Y') ?> Linkora</p>
+        <p><?= e(config('tagline')) ?>.</p>
+        <p class="muted">&copy; <?= date('Y') ?> <?= e(brand()) ?></p>
     </div>
 </footer>
 <script src="<?= asset('js/app.js') ?>" defer></script>

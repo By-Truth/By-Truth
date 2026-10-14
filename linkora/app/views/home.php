@@ -102,7 +102,7 @@ $price = money((int) config('paystack.pro_price'), (string) config('paystack.cur
                     <li><?= icon('check') ?>Everything in Free</li>
                     <li><?= icon('check') ?>All premium themes</li>
                     <li><?= icon('check') ?>90-day analytics</li>
-                    <li><?= icon('check') ?>Remove Linkora branding</li>
+                    <li><?= icon('check') ?>Remove <?= e(brand()) ?> branding</li>
                 </ul>
                 <a class="btn btn-accent btn-block" href="<?= url('register') ?>">Go Pro</a>
             </div>
@@ -113,6 +113,6 @@ $price = money((int) config('paystack.pro_price'), (string) config('paystack.cur
 <section class="section cta">
     <div class="container cta-inner">
         <h2>Your audience is one tap away.</h2>
-        <a class="btn btn-accent btn-lg" href="<?= url('register') ?>">Create your Linkora</a>
+        <a class="btn btn-accent btn-lg" href="<?= url('register') ?>">Create your <?= e(brand()) ?></a>
     </div>
 </section>

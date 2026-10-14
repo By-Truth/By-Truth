@@ -13,7 +13,7 @@ function dashboard(): void
     )->fetchAll(PDO::FETCH_KEY_PAIR);
 
     render('dashboard/links', [
-        'title'  => 'Links — Linkora',
+        'title'  => 'Links — ' . brand(),
         'active' => 'links',
         'user'   => $user,
         'links'  => $links,
@@ -123,7 +123,7 @@ function appearance(): void
 {
     $user = require_auth();
     render('dashboard/appearance', [
-        'title'  => 'Appearance — Linkora',
+        'title'  => 'Appearance — ' . brand(),
         'active' => 'appearance',
         'user'   => $user,
         'pro'    => is_pro($user),
@@ -203,7 +203,7 @@ function settings(): void
 {
     $user = require_auth();
     render('dashboard/settings', [
-        'title'  => 'Settings — Linkora',
+        'title'  => 'Settings — ' . brand(),
         'active' => 'settings',
         'user'   => $user,
         'errors' => take_errors(),

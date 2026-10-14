@@ -10,7 +10,7 @@ function billing(): void
     )->fetchAll();
 
     render('dashboard/billing', [
-        'title'    => 'Plan — Linkora',
+        'title'    => 'Plan — ' . brand(),
         'active'   => 'billing',
         'user'     => $user,
         'pro'      => is_pro($user),

@@ -52,7 +52,7 @@ function analytics(): void
     )->fetchAll(PDO::FETCH_KEY_PAIR);
 
     render('dashboard/analytics', [
-        'title'     => 'Analytics — Linkora',
+        'title'     => 'Analytics — ' . brand(),
         'active'    => 'analytics',
         'user'      => $user,
         'pro'       => $pro,
