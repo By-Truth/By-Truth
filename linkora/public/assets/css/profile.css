@@ -1,0 +1,52 @@
+/* Public profile page. Colours come from theme variables set inline on <body>. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+    margin: 0; min-height: 100vh; background: var(--bg); background-attachment: fixed; color: var(--text);
+    font: 16px/1.5 var(--font); -webkit-font-smoothing: antialiased;
+}
+.profile-main { position: relative; max-width: 580px; margin: 0 auto; padding: 64px 20px 40px; min-height: 100vh; display: flex; flex-direction: column; }
+.is-preview .profile-main { padding-top: 48px; }
+
+.share-btn {
+    position: absolute; top: 16px; right: 16px; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
+    border: 1px solid var(--btn-border); background: var(--btn-bg); color: var(--btn-text); cursor: pointer; backdrop-filter: blur(8px);
+    transition: transform .15s;
+}
+.share-btn:hover { transform: scale(1.06); }
+.share-btn svg { width: 18px; height: 18px; }
+
+.profile-head { text-align: center; margin-bottom: 32px; }
+.avatar { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; box-shadow: var(--shadow); }
+.avatar-initial {
+    display: grid; place-items: center; background: var(--btn-bg); color: var(--btn-text); border: 1px solid var(--btn-border);
+    font: 40px/1 "DM Serif Display", Georgia, serif;
+}
+h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
+.handle { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+.bio { margin: 12px auto 0; max-width: 420px; color: var(--muted); font-size: 15px; }
+
+.links { display: grid; gap: 14px; }
+.link {
+    display: block; padding: 17px 24px; text-align: center; text-decoration: none; font-weight: 600; font-size: 16px; font-family: inherit;
+    background: var(--btn-bg); color: var(--btn-text); border: 1.5px solid var(--btn-border); border-radius: var(--radius);
+    box-shadow: var(--shadow); transition: background .18s, color .18s, transform .18s; overflow-wrap: anywhere;
+}
+.link:hover, .link:focus-visible { background: var(--btn-hover); color: var(--btn-hover-text); transform: translateY(-2px); outline: none; }
+.link:active { transform: translateY(0); }
+.empty { text-align: center; color: var(--muted); }
+
+.brand { margin-top: auto; padding-top: 48px; text-align: center; font-size: 13px; font-family: "Inter", system-ui, sans-serif; }
+.brand a { color: var(--muted); text-decoration: none; }
+.brand a:hover { color: var(--text); }
+
+.toast {
+    position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); background: #16151d; color: #fff; padding: 10px 18px;
+    border-radius: 999px; font: 500 14px "Inter", system-ui, sans-serif; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 480px) {
+    .profile-main { padding: 56px 16px 32px; }
+}
