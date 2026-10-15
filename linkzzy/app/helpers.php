@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 const RESERVED_USERNAMES = [
     'admin', 'administrator', 'api', 'assets', 'billing', 'dashboard', 'go', 'help',
-    'linkora', 'login', 'logout', 'paystack', 'pricing', 'privacy', 'register', 'root',
+    'linkzzy', 'login', 'logout', 'paystack', 'pricing', 'privacy', 'register', 'root',
     'settings', 'signup', 'static', 'support', 'terms', 'uploads', 'user', 'users', 'www',
 ];
 
@@ -46,7 +46,7 @@ function query(string $sql, array $params = []): PDOStatement
 
 function brand(): string
 {
-    return (string) config('app_name', 'Linkora');
+    return (string) config('app_name', 'Linkzzy');
 }
 
 // ---------------------------------------------------------------- http

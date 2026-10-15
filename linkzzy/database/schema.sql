@@ -1,8 +1,8 @@
--- Linkora database schema (MySQL 5.7+ / MariaDB 10.3+)
+-- Linkzzy database schema (MySQL 5.7+ / MariaDB 10.3+)
 -- Usage: mysql -u root -p < database/schema.sql
 
-CREATE DATABASE IF NOT EXISTS linkora CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE linkora;
+CREATE DATABASE IF NOT EXISTS linkzzy CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE linkzzy;
 
 CREATE TABLE IF NOT EXISTS users (
     id            INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

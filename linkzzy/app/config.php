@@ -7,7 +7,7 @@
 
 $config = [
     // Brand name shown across the site. Change it here (or in config.local.php).
-    'app_name' => getenv('APP_NAME') ?: 'Linkora',
+    'app_name' => getenv('APP_NAME') ?: 'Linkzzy',
     'tagline'  => 'One link, your whole world',
     // Public URL without a trailing slash, e.g. https://yourbrand.com
     // Leave empty to derive it from the current request.
@@ -17,7 +17,7 @@ $config = [
     'db' => [
         'host' => getenv('DB_HOST') ?: '127.0.0.1',
         'port' => (int) (getenv('DB_PORT') ?: 3306),
-        'name' => getenv('DB_NAME') ?: 'linkora',
+        'name' => getenv('DB_NAME') ?: 'linkzzy',
         'user' => getenv('DB_USER') ?: 'root',
         'pass' => getenv('DB_PASS') ?: '',
     ],

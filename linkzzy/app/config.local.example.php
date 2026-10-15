@@ -1,13 +1,13 @@
 <?php
 // Copy to config.local.php and fill in. config.local.php is git-ignored.
 return [
-    'app_name' => 'Linkora',
+    'app_name' => 'Linkzzy',
     'tagline'  => 'One link, your whole world',
     'base_url' => 'https://your-domain.com',
     'db' => [
         'host' => '127.0.0.1',
-        'name' => 'linkora',
-        'user' => 'linkora',
+        'name' => 'linkzzy',
+        'user' => 'linkzzy',
         'pass' => 'change-me',
     ],
     'paystack' => [

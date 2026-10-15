@@ -12,7 +12,7 @@ I turn ideas into live, working products — from front-end storefronts to full-
 
 ## Featured projects
 
-- **[Linkora](./linkora)**: a simple, elegant link-in-bio platform built with PHP and MySQL. It has themes, analytics, Paystack payments and an admin dashboard.
+- **[Linkzzy](./linkzzy)**: a simple, elegant link-in-bio platform built with PHP and MySQL. It has themes, analytics, Paystack payments and an admin dashboard.
 - **[Karter Empire](https://github.com/By-Truth/karterempire)** — full-stack e-commerce site for a fashion brand, with a Node.js/Express backend, MySQL, and JWT authentication.
 - **[Dee Wealth](https://by-truth.github.io/DeeWealth/)** — front-end e-commerce site for a supermarket and medical store, with product search and a shopping cart.
 - **[Thomas Rentals](https://by-truth.github.io/thomarentals/)** — property rental platform concept with online applications and a rent payment page.

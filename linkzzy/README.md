@@ -1,4 +1,4 @@
-# Linkora
+# Linkzzy
 
 **One link, your whole world.** A simple, elegant link-in-bio platform in plain PHP and MySQL. It uses no framework and has no build step.
 
@@ -52,7 +52,7 @@ Point the web server's document root at **`public/`**, never at the project root
 **Nginx:**
 
 ```nginx
-root /var/www/linkora/public;
+root /var/www/linkzzy/public;
 index index.php;
 
 location / {
@@ -75,7 +75,7 @@ Serve the site over HTTPS. Session cookies are marked `Secure` automatically whe
 1. Add your secret and public keys to `config.local.php`.
 2. In the Paystack dashboard, go to **Settings → API Keys & Webhooks** and set the webhook URL to `https://your-domain.com/paystack/webhook`.
 
-When a user clicks **Upgrade**, Linkora creates a pending payment and sends them to Paystack's checkout. After payment, Paystack redirects back to `/billing/callback`, which verifies the transaction with the API. The webhook is a backup in case the user closes the tab. Activation is idempotent and checks the amount and currency. Each payment adds 30 days of Pro, and nothing renews automatically.
+When a user clicks **Upgrade**, Linkzzy creates a pending payment and sends them to Paystack's checkout. After payment, Paystack redirects back to `/billing/callback`, which verifies the transaction with the API. The webhook is a backup in case the user closes the tab. Activation is idempotent and checks the amount and currency. Each payment adds 30 days of Pro, and nothing renews automatically.
 
 If you leave the keys empty, the Upgrade button shows "Coming soon".
 
