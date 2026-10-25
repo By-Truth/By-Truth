@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- page:start -->
+<title>My Discipline System</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Patrick+Hand&display=swap">
+<style>
+/* Layout: one spiral-bound notebook page on a desk; two pages (System, 30 Lies) switched by paper tabs. */
+:root {
+  --desk: #d6d7d4;
+  --desk-shade: #c8c9c5;
+  --paper: #f7f6f2;
+  --ink: #25272c;
+  --ink-soft: #62656d;
+  --rule: #cfd5de;
+  --check: #234a86;
+  --miss: #b3362c;
+  --mark: #f1e6a2;
+  --ring: #2b2c30;
+  --shadow: rgba(30, 32, 36, .18);
+  --f-head: "Architects Daughter", "Comic Sans MS", "Segoe Print", cursive;
+  --f-hand: "Patrick Hand", "Comic Sans MS", "Segoe Print", cursive;
+  --f-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --line: 32px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --desk: #131416; --desk-shade: #0d0e0f; --paper: #24252a; --ink: #e9e7e1; --ink-soft: #a5a49f;
+    --rule: #383b42; --check: #9dbbef; --miss: #f08174; --mark: #4b4527; --ring: #6c6e75;
+    --shadow: rgba(0, 0, 0, .55); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --desk: #131416; --desk-shade: #0d0e0f; --paper: #24252a; --ink: #e9e7e1; --ink-soft: #a5a49f;
+  --rule: #383b42; --check: #9dbbef; --miss: #f08174; --mark: #4b4527; --ring: #6c6e75;
+  --shadow: rgba(0, 0, 0, .55); color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 30% 0%, var(--desk) 0%, var(--desk-shade) 100%);
+  background-color: var(--desk);
+  color: var(--ink);
+  font-family: var(--f-hand);
+  font-size: 19px;
+  line-height: 1.4;
+  padding-block: 20px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px dashed var(--check); outline-offset: 2px; }
+
+.book { max-width: 980px; margin: 0 auto; }
+
+/* Paper tabs */
+.tabs { display: flex; gap: 6px; padding-left: 44px; }
+.tab {
+  font-family: var(--f-head); text-transform: uppercase; letter-spacing: .08em; font-size: 15px;
+  background: var(--desk-shade); color: var(--ink-soft);
+  border: 0; border-radius: 10px 10px 0 0; padding: 8px 16px 6px;
+}
+.tab[aria-selected="true"] { background: var(--paper); color: var(--ink); }
+
+/* The page */
+.page {
+  position: relative;
+  background-color: var(--paper);
+  background-image: linear-gradient(to bottom, transparent calc(var(--line) - 1px), var(--rule) calc(var(--line) - 1px), var(--rule) var(--line));
+  background-size: 100% var(--line);
+  border-radius: 4px 10px 10px 4px;
+  box-shadow: 0 1px 0 var(--rule), 0 18px 40px -12px var(--shadow), 0 2px 6px var(--shadow);
+  padding: 28px 32px 36px 64px;
+}
+.page::before { /* spiral binding */
+  content: ""; position: absolute; left: -10px; top: 18px; bottom: 18px; width: 34px;
+  background: repeating-linear-gradient(to bottom, transparent 0 9px, var(--ring) 9px 15px, transparent 15px 30px);
+  border-radius: 6px;
+}
+.page::after { /* punched holes */
+  content: ""; position: absolute; left: 30px; top: 18px; bottom: 18px; width: 8px;
+  background: repeating-linear-gradient(to bottom, transparent 0 9px, var(--desk-shade) 9px 15px, transparent 15px 30px);
+  border-radius: 4px;
+}
+
+h1, h2 {
+  font-family: var(--f-head); font-weight: 400; text-transform: uppercase; letter-spacing: .1em;
+  margin: 0; text-wrap: balance;
+}
+h1 { font-size: clamp(22px, 4vw, 30px); border-bottom: 2px solid var(--ink); display: inline-block; padding-bottom: 2px; }
+h2 { font-size: 17px; border-bottom: 1.5px solid var(--ink); display: inline-block; margin-bottom: 8px; }
+
+.title-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin-bottom: 22px; }
+.title-row .center { flex: 1 1 auto; text-align: center; }
+.date-chip { font-family: var(--f-head); font-size: 18px; border-bottom: 1.5px solid var(--ink); white-space: nowrap; }
+.sub { color: var(--ink-soft); font-size: 16px; }
+.linkish { background: none; border: 0; padding: 0; color: var(--check); text-decoration: underline; text-underline-offset: 3px; }
+
+.grid-2 { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px 40px; }
+.stack { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+section { min-width: 0; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.edit-btn { background: none; border: 0; color: var(--ink-soft); font-size: 15px; padding: 2px 4px; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Hand-drawn checkboxes */
+.checklist { list-style: none; margin: 0; padding: 0; }
+.checklist li { min-height: var(--line); display: flex; align-items: center; gap: 12px; }
+.checklist label { display: flex; align-items: center; gap: 12px; cursor: pointer; flex: 1; min-width: 0; }
+.box {
+  appearance: none; -webkit-appearance: none; margin: 0; flex: none;
+  width: 19px; height: 19px; border: 1.8px solid var(--ink); border-radius: 2px;
+  display: grid; place-items: center; cursor: pointer; background: transparent;
+}
+.box::after { content: ""; font-family: var(--f-hand); font-size: 22px; line-height: 1; transform: translate(1px, -3px); color: var(--check); }
+.box:checked::after { content: "\2713"; }
+.box:disabled { opacity: .45; cursor: not-allowed; }
+.checklist .name { overflow-wrap: anywhere; }
+.checklist li.done .name { color: var(--ink); }
+.checklist li.missed .name { color: var(--miss); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.count { font-size: 15px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+
+.boxed { border: 2px solid var(--ink); padding: 10px 16px 12px; background: var(--paper); }
+
+/* Editing lists */
+.edit-row { display: flex; gap: 8px; align-items: center; min-height: var(--line); }
+.edit-row input {
+  flex: 1; min-width: 0; background: transparent; border: 0; border-bottom: 1.5px dashed var(--ink-soft);
+  padding: 2px 2px; font-size: 18px;
+}
+.x-btn { background: none; border: 0; color: var(--miss); font-size: 22px; line-height: 1; padding: 0 6px; }
+.add-row input { border-bottom-style: solid; }
+.add-btn { background: none; border: 1.5px solid var(--ink); border-radius: 3px; font-size: 15px; padding: 1px 10px; }
+
+.reminder-text {
+  width: 100%; resize: none; background: transparent; border: 0;
+  font-size: 22px; line-height: var(--line); padding: 0; min-height: calc(var(--line) * 2);
+  border-bottom: 2px solid var(--ink);
+}
+
+/* Habit tracker */
+.tracker-wrap { overflow-x: auto; margin: 6px -4px 0; padding: 0 4px 6px; background: var(--paper); }
+.tracker { border-collapse: collapse; font-size: 16px; font-variant-numeric: tabular-nums; }
+.tracker th, .tracker td { border: 1.3px solid var(--ink); padding: 0; text-align: center; }
+.tracker thead th { border-top: 0; font-weight: 400; font-size: 13px; padding: 2px 0 0; }
+.tracker thead th:first-child { border-left: 0; text-align: left; font-family: var(--f-head); font-size: 14px; letter-spacing: .06em; }
+.tracker tbody th {
+  text-align: left; font-weight: 400; white-space: nowrap; padding: 2px 10px 2px 2px; border-left: 0;
+  position: sticky; left: 0; background: var(--paper); z-index: 1; max-width: 12em; overflow: hidden; text-overflow: ellipsis;
+}
+.day-head { background: none; border: 0; width: 100%; padding: 0 0 2px; display: flex; flex-direction: column; align-items: center; line-height: 1.05; font-size: 14px; }
+.day-head small { font-size: 11px; color: var(--ink-soft); }
+.cell { width: 28px; height: 30px; background: none; border: 0; font-size: 20px; line-height: 1; display: grid; place-items: center; }
+.cell[data-v="1"] { color: var(--check); }
+.cell[data-v="-1"] { color: var(--miss); }
+.cell:disabled { cursor: default; }
+.tracker .today { background: var(--mark); }
+.tracker .sel { box-shadow: inset 0 0 0 2px var(--check); }
+.tracker td.future { opacity: .5; }
+.tracker tfoot td, .tracker tfoot th { font-size: 13px; color: var(--ink-soft); border-bottom: 0; padding: 2px 0; }
+.tracker tfoot th { text-align: left; position: sticky; left: 0; background: var(--paper); font-weight: 400; border-left: 0; }
+.month-nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.month-nav button { background: none; border: 1.5px solid var(--ink); border-radius: 3px; padding: 0 10px; font-size: 18px; }
+.month-label { font-family: var(--f-head); text-transform: uppercase; letter-spacing: .08em; min-width: 9em; text-align: center; }
+.legend { font-size: 14px; color: var(--ink-soft); }
+
+/* Will + notes */
+.will-list { display: flex; flex-direction: column; }
+.will-list label { display: flex; gap: 10px; align-items: center; min-height: var(--line); }
+.line-input { flex: 1; min-width: 0; background: transparent; border: 0; padding: 0; font-size: 19px; height: var(--line); }
+.notes {
+  width: 100%; background: transparent; border: 0; resize: vertical; padding: 0;
+  font-size: 19px; line-height: var(--line); min-height: calc(var(--line) * 4);
+}
+
+.footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; margin-top: 26px; }
+.progress { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.progress .label { font-family: var(--f-head); text-transform: uppercase; letter-spacing: .08em; font-size: 16px; }
+.pct { border: 2px solid var(--ink); padding: 2px 14px; font-size: 26px; font-variant-numeric: tabular-nums; min-width: 3.4em; text-align: center; }
+.stats { display: flex; gap: 18px; flex-wrap: wrap; font-size: 16px; color: var(--ink-soft); }
+.stats b { color: var(--ink); font-weight: 400; font-size: 20px; }
+.motto { font-family: var(--f-head); text-transform: uppercase; letter-spacing: .1em; font-size: 15px; text-align: center; line-height: 1.9; }
+.motto u { text-underline-offset: 4px; }
+
+/* Lies page */
+.lies { columns: 2 260px; column-gap: 40px; list-style: none; padding: 0; margin: 4px 0 0; }
+.lies li { break-inside: avoid; min-height: var(--line); display: flex; align-items: center; gap: 10px; }
+.lies .num { width: 1.8em; text-align: right; color: var(--ink-soft); font-variant-numeric: tabular-nums; flex: none; }
+.lies li.beaten .name { text-decoration: line-through; text-decoration-color: var(--miss); text-decoration-thickness: 2px; color: var(--ink-soft); }
+.lies .edit-row { break-inside: avoid; }
+.truths { list-style: none; padding: 0; margin: 0; }
+.truths li { min-height: var(--line); display: flex; align-items: baseline; gap: 8px; font-size: 20px; }
+.truths li::before { content: "-"; }
+.won-row-wrap { overflow-x: auto; background: var(--paper); }
+.won-row { border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.won-row td { border: 1.3px solid var(--ink); width: 27px; min-width: 27px; height: 28px; text-align: center; font-size: 15px; padding: 0; }
+.won-row tr:last-child td { font-size: 21px; color: var(--miss); }
+.won-row td.today { background: var(--mark); }
+.hint { font-size: 15px; color: var(--ink-soft); margin: 4px 0 0; }
+
+/* Backup */
+.backup { margin-top: 28px; font-size: 16px; }
+.backup summary { cursor: pointer; color: var(--ink-soft); }
+.backup-body { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.backup textarea {
+  width: 100%; min-height: 110px; font-family: var(--f-mono); font-size: 12px;
+  background: var(--paper); border: 1.5px solid var(--ink-soft); border-radius: 3px; padding: 8px;
+}
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { background: none; border: 1.5px solid var(--ink); border-radius: 3px; padding: 2px 12px; font-size: 16px; }
+.btn.danger { border-color: var(--miss); color: var(--miss); }
+
+.status { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  background: var(--ink); color: var(--paper); font-size: 15px; padding: 4px 12px; border-radius: 3px;
+  opacity: 0; transform: translateY(6px); transition: opacity .2s, transform .2s; pointer-events: none; }
+.status.show { opacity: 1; transform: none; }
+
+@media (max-width: 720px) {
+  body { font-size: 18px; }
+  .grid-2 { grid-template-columns: minmax(0, 1fr); }
+  .page { padding: 22px 16px 28px 36px; }
+  .page::before { left: -8px; width: 24px; }
+  .page::after { left: 18px; width: 6px; }
+  .tabs { padding-left: 28px; }
+  .title-row .center { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) { .status { transition: none; } }
+</style>
+
+<div class="book">
+  <div class="tabs" role="tablist" aria-label="Notebook pages">
+    <button class="tab" role="tab" id="tab-system" aria-controls="page-system" aria-selected="true">My System</button>
+    <button class="tab" role="tab" id="tab-lies" aria-controls="page-lies" aria-selected="false">30 Lies</button>
+  </div>
+
+  <!-- PAGE 1: the system -->
+  <main class="page" id="page-system" role="tabpanel" aria-labelledby="tab-system">
+    <div class="title-row">
+      <div class="center"><h1>My Discipline System</h1></div>
+      <div>
+        <span class="date-chip" id="sel-date"></span>
+      </div>
+    </div>
+    <p class="sub" id="day-note" hidden></p>
+
+    <div class="grid-2">
+      <section aria-labelledby="h-nn">
+        <div class="sec-head">
+          <h2 id="h-nn">Daily Non-Negotiables</h2>
+          <span class="count" id="nn-count"></span>
+        </div>
+        <ul class="checklist" id="list-habits"></ul>
+        <button class="edit-btn" data-edit="habits">Edit list</button>
+      </section>
+
+      <div class="stack">
+        <section class="boxed" aria-labelledby="h-other">
+          <div class="sec-head">
+            <h2 id="h-other">Other Habits</h2>
+            <span class="count" id="other-count"></span>
+          </div>
+          <ul class="checklist" id="list-others"></ul>
+          <button class="edit-btn" data-edit="others">Edit list</button>
+        </section>
+        <section aria-labelledby="h-rem">
+          <h2 id="h-rem">Reminder:</h2>
+          <textarea class="reminder-text" id="reminder" rows="2" aria-labelledby="h-rem"></textarea>
+        </section>
+      </div>
+    </div>
+
+    <section aria-labelledby="h-tracker" style="margin-top: 28px;">
+      <div class="sec-head" style="flex-wrap: wrap;">
+        <h2 id="h-tracker">Habit Tracker</h2>
+        <div class="month-nav">
+          <button id="prev-month" aria-label="Previous month">&lsaquo;</button>
+          <span class="month-label" id="month-label"></span>
+          <button id="next-month" aria-label="Next month">&rsaquo;</button>
+        </div>
+      </div>
+      <p class="legend">Tap a box: empty &rarr; &#10003; done &rarr; &#10007; missed. Tap a day number to fill in that day's page.</p>
+      <div class="tracker-wrap"><table class="tracker" id="tracker"></table></div>
+    </section>
+
+    <div class="grid-2" style="margin-top: 26px;">
+      <section aria-labelledby="h-will">
+        <h2 id="h-will">Today I Will:</h2>
+        <div class="will-list" id="will-list"></div>
+      </section>
+      <section aria-labelledby="h-notes">
+        <h2 id="h-notes">Notes / Reflections</h2>
+        <textarea class="notes" id="notes" aria-labelledby="h-notes" placeholder="- Energy was low in the morning..."></textarea>
+      </section>
+    </div>
+
+    <div class="footer-row">
+      <div class="progress">
+        <span class="label">Overall progress:</span>
+        <span class="pct" id="pct"></span>
+        <div class="stats">
+          <span>streak <b id="streak">0</b> days</span>
+          <span>days won <b id="won">0</b></span>
+        </div>
+      </div>
+      <p class="motto">Keep <u>showing up.</u><br>Your future self is<br><u>counting on you.</u></p>
+    </div>
+
+    <details class="backup">
+      <summary>Backup &amp; restore</summary>
+      <div class="backup-body">
+        <p class="hint">Your notebook is saved in this browser only. Copy the backup text somewhere safe, or paste one here to restore it on another device.</p>
+        <textarea id="backup-text" aria-label="Backup text" spellcheck="false"></textarea>
+        <div class="btn-row">
+          <button class="btn" id="btn-copy">Copy backup</button>
+          <button class="btn" id="btn-restore">Restore from text</button>
+          <button class="btn danger" id="btn-reset">Erase everything</button>
+        </div>
+      </div>
+    </details>
+  </main>
+
+  <!-- PAGE 2: 30 lies -->
+  <main class="page" id="page-lies" role="tabpanel" aria-labelledby="tab-lies" hidden>
+    <div class="title-row">
+      <div class="center"><h1 id="lies-title">30 Lies I Told Myself</h1></div>
+      <span class="date-chip" id="lies-month"></span>
+    </div>
+    <p class="hint">Tick a lie when you catch yourself telling it and act anyway. Ticks reset each month.</p>
+    <ul class="lies" id="list-lies"></ul>
+    <button class="edit-btn" data-edit="lies">Edit list</button>
+
+    <div class="grid-2" style="margin-top: 26px;">
+      <section aria-labelledby="h-truth">
+        <h2 id="h-truth">The Truth:</h2>
+        <ul class="truths" id="list-truths"></ul>
+        <button class="edit-btn" data-edit="truths">Edit list</button>
+      </section>
+      <section class="boxed" aria-labelledby="h-rem2">
+        <h2 id="h-rem2">Reminder</h2>
+        <p id="reminder-copy" style="margin: 0; font-size: 21px; white-space: pre-line;"></p>
+        <p style="margin: 6px 0 0; font-size: 21px;">Don't lie to yourself again.<br>Prove it.</p>
+      </section>
+    </div>
+
+    <section aria-labelledby="h-month" style="margin-top: 28px;">
+      <h2 id="h-month">Progress this month:</h2>
+      <p class="hint">A day gets an &#10007; when every non-negotiable is done.</p>
+      <div class="won-row-wrap"><table class="won-row" id="won-row"></table></div>
+    </section>
+
+    <div class="footer-row">
+      <div class="progress">
+        <span class="label">Overall progress:</span>
+        <span class="pct" id="pct2"></span>
+      </div>
+      <p class="motto">Discipline is a decision,<br><u>not a feeling.</u></p>
+    </div>
+  </main>
+</div>
+
+<div class="status" id="status" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  "use strict";
+  const STORE_KEY = "discipline-system-v1";
+
+  const DEFAULT_HABITS = ["Wake up before 6am", "Cold shower", "No phone until 11am", "Workout", "Read 20 pages",
+    "Meditate 10 min", "Eat clean", "3L water", "No alcohol", "Sleep by 10:30pm"];
+  const DEFAULT_OTHERS = ["Journaling", "Deep work", "Learn something", "10k steps", "Stretch"];
+  const DEFAULT_LIES = ["I'll start tomorrow", "I'm too tired", "I don't have time", "I'll do it later",
+    "I need motivation first", "This doesn't matter", "I'm just not disciplined", "I'll start when things calm down",
+    "It's only one day", "I deserve a break", "I work better under pressure", "I'm not seeing results",
+    "I don't know where to start", "I'll do it when I'm ready", "I'm too young", "I'm too old",
+    "I'm not good enough", "I need more money", "I'll start when I feel ready", "I don't have support",
+    "Everyone else has it easier", "I'm just not built for this", "I'll do it perfectly or not at all",
+    "I need to figure everything out", "I'll start next month", "I'm not consistent", "I keep failing",
+    "What's the point?", "Nobody will notice", "I have to be in the mood"];
+  const DEFAULT_TRUTHS = ["Action comes first, motivation comes after.", "Small steps every day > big plans never started.",
+    "Discipline is a decision, not a feeling.", "I choose my future."];
+
+  const uid = () => Math.random().toString(36).slice(2, 10);
+  const toItems = (names) => names.map((name) => ({ id: uid(), name }));
+  const freshState = () => ({
+    habits: toItems(DEFAULT_HABITS),
+    others: toItems(DEFAULT_OTHERS),
+    lies: toItems(DEFAULT_LIES),
+    truths: toItems(DEFAULT_TRUTHS),
+    reminder: "Discipline today,\nfreedom tomorrow.",
+    days: {},    // "YYYY-MM-DD" -> { h: {habitId: 1 | -1}, o: {otherId: 1}, will: [..3], notes: "" }
+    beaten: {},  // "YYYY-MM" -> [lieId, ...]
+  });
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (raw) return Object.assign(freshState(), JSON.parse(raw));
+    } catch (e) { /* storage unavailable or corrupt: start fresh */ }
+    return freshState();
+  }
+
+  let state = load();
+  let saveTimer = null;
+  function save(quiet) {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(state));
+        if (!quiet) toast("Saved");
+      } catch (e) {
+        toast("Not saved: this browser has storage turned off");
+      }
+    }, 300);
+  }
+
+  let toastTimer = null;
+  function toast(msg) {
+    const el = $("status");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove("show"), 1400);
+  }
+
+  // ---------- dates ----------
+  const pad = (n) => String(n).padStart(2, "0");
+  const keyOf = (y, m, d) => `${y}-${pad(m + 1)}-${pad(d)}`;
+  const monthKey = (y, m) => `${y}-${pad(m + 1)}`;
+  const daysIn = (y, m) => new Date(y, m + 1, 0).getDate();
+  const parseKey = (k) => { const [y, m, d] = k.split("-").map(Number); return new Date(y, m - 1, d); };
+  const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const WD = ["S", "M", "T", "W", "T", "F", "S"];
+
+  let now = new Date();
+  let todayKey = keyOf(now.getFullYear(), now.getMonth(), now.getDate());
+  const view = { y: now.getFullYear(), m: now.getMonth() };
+  let selected = todayKey;
+  const editing = { habits: false, others: false, lies: false, truths: false };
+
+  const isFuture = (k) => k > todayKey;
+  const day = (k) => state.days[k] || { h: {}, o: {}, will: ["", "", ""], notes: "" };
+  function dayForWrite(k) {
+    if (!state.days[k]) state.days[k] = { h: {}, o: {}, will: ["", "", ""], notes: "" };
+    return state.days[k];
+  }
+  const won = (k) => state.habits.length > 0 && state.habits.every((h) => day(k).h[h.id] === 1);
+
+  function streak() {
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    if (!won(todayKey)) d.setDate(d.getDate() - 1);
+    let n = 0;
+    while (won(keyOf(d.getFullYear(), d.getMonth(), d.getDate()))) { n++; d.setDate(d.getDate() - 1); }
+    return n;
+  }
+
+  function elapsedDays(y, m) {
+    const cur = now.getFullYear() * 12 + now.getMonth(), v = y * 12 + m;
+    if (v < cur) return daysIn(y, m);
+    if (v === cur) return now.getDate();
+    return 0;
+  }
+
+  function monthProgress(y, m) {
+    const n = elapsedDays(y, m), H = state.habits.length;
+    let done = 0, wonDays = 0;
+    for (let d = 1; d <= n; d++) {
+      const k = keyOf(y, m, d), rec = day(k);
+      state.habits.forEach((h) => { if (rec.h[h.id] === 1) done++; });
+      if (won(k)) wonDays++;
+    }
+    return { pct: n && H ? Math.round((done / (n * H)) * 100) : 0, wonDays };
+  }
+
+  // ---------- DOM helpers ----------
+  const $ = (id) => document.getElementById(id);
+  function el(tag, attrs = {}, ...kids) {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (v === false || v == null) continue;
+      if (k === "class") n.className = v;
+      else if (k === "text") n.textContent = v;
+      else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+      else if (k in n && typeof v !== "string") n[k] = v;
+      else n.setAttribute(k, v === true ? "" : v);
+    }
+    kids.flat().forEach((c) => c != null && n.append(c));
+    return n;
+  }
+
+  // ---------- list editing (shared by all four lists) ----------
+  function editRows(listName, rowTag) {
+    const items = state[listName];
+    const rows = items.map((item) => el(rowTag, { class: "edit-row" },
+      el("input", { value: item.name, "aria-label": "Rename", oninput: (e) => { item.name = e.target.value; save(true); } }),
+      el("button", { class: "x-btn", "aria-label": `Remove ${item.name}`, text: "×",
+        onclick: () => { state[listName] = items.filter((i) => i !== item); save(); render(); } })
+    ));
+    const input = el("input", { placeholder: "Add new...", "aria-label": "New item" });
+    const add = () => {
+      const name = input.value.trim();
+      if (!name) return;
+      state[listName].push({ id: uid(), name });
+      save(); render();
+      const again = document.querySelector(`[data-add="${listName}"] input`);
+      if (again) again.focus();
+    };
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") add(); });
+    rows.push(el(rowTag, { class: "edit-row add-row", "data-add": listName }, input,
+      el("button", { class: "add-btn", text: "Add", onclick: add })));
+    return rows;
+  }
+
+  // ---------- render: system page ----------
+  function renderChecklist(listName, ulId, countId) {
+    const ul = $(ulId);
+    ul.replaceChildren();
+    if (editing[listName]) { ul.append(...editRows(listName, "li")); $(countId).textContent = ""; return; }
+    const rec = day(selected), field = listName === "habits" ? "h" : "o", future = isFuture(selected);
+    let done = 0;
+    state[listName].forEach((item) => {
+      const v = rec[field][item.id];
+      if (v === 1) done++;
+      const box = el("input", { type: "checkbox", class: "box", checked: v === 1, disabled: future,
+        onchange: (e) => {
+          const r = dayForWrite(selected);
+          if (e.target.checked) r[field][item.id] = 1; else delete r[field][item.id];
+          save(true); render();
+        } });
+      ul.append(el("li", { class: v === 1 ? "done" : v === -1 ? "missed" : "" },
+        el("label", {}, box, el("span", { class: "name", text: item.name }))));
+    });
+    $(countId).textContent = state[listName].length ? `${done}/${state[listName].length}` : "";
+  }
+
+  function renderTracker() {
+    const { y, m } = view, n = daysIn(y, m), t = $("tracker");
+    t.replaceChildren();
+    const headRow = el("tr", {}, el("th", { scope: "col", text: "Habits" }));
+    const keys = [];
+    for (let d = 1; d <= n; d++) {
+      const k = keyOf(y, m, d);
+      keys.push(k);
+      const cls = [k === todayKey && "today", k === selected && "sel"].filter(Boolean).join(" ");
+      headRow.append(el("th", { scope: "col", class: cls },
+        el("button", { class: "day-head", disabled: isFuture(k), "aria-label": `Open ${d} ${MONTHS[m]}`,
+          onclick: () => { selected = k; render(); } },
+          el("span", { text: d }), el("small", { text: WD[new Date(y, m, d).getDay()] }))));
+    }
+    t.append(el("thead", {}, headRow));
+
+    const body = el("tbody");
+    if (!state.habits.length) body.append(el("tr", {}, el("th", { text: "Add a non-negotiable to start tracking" })));
+    state.habits.forEach((h) => {
+      const tr = el("tr", {}, el("th", { scope: "row", title: h.name, text: h.name }));
+      keys.forEach((k, i) => {
+        const v = day(k).h[h.id] || 0, future = isFuture(k);
+        const cls = [k === todayKey && "today", k === selected && "sel", future && "future"].filter(Boolean).join(" ");
+        tr.append(el("td", { class: cls },
+          el("button", { class: "cell", "data-v": String(v), disabled: future,
+            "aria-label": `${h.name}, day ${i + 1}: ${v === 1 ? "done" : v === -1 ? "missed" : "not marked"}`,
+            text: v === 1 ? "✓" : v === -1 ? "✗" : "",
+            onclick: () => {
+              const r = dayForWrite(k), next = v === 0 ? 1 : v === 1 ? -1 : 0;
+              if (next) r.h[h.id] = next; else delete r.h[h.id];
+              save(true); render();
+            } })));
+      });
+      body.append(tr);
+    });
+    t.append(body);
+
+    // per-day completion row
+    const foot = el("tr", {}, el("th", { text: "Done" }));
+    keys.forEach((k) => {
+      const c = state.habits.filter((h) => day(k).h[h.id] === 1).length;
+      foot.append(el("td", { class: k === todayKey ? "today" : "", text: isFuture(k) || !state.habits.length ? "" : String(c) }));
+    });
+    t.append(el("tfoot", {}, foot));
+    $("month-label").textContent = `${MONTHS[m]} ${y}`;
+  }
+
+  function renderDay() {
+    const d = parseKey(selected), rec = day(selected);
+    $("sel-date").textContent = `${pad(d.getDate())}/${pad(d.getMonth() + 1)}`;
+    const note = $("day-note");
+    note.hidden = selected === todayKey;
+    note.replaceChildren();
+    if (selected !== todayKey) {
+      note.append(`You're filling in ${d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" })}. `,
+        el("button", { class: "linkish", text: "Back to today", onclick: () => { selected = todayKey; view.y = now.getFullYear(); view.m = now.getMonth(); render(); } }));
+    }
+    $("h-will").textContent = selected === todayKey ? "Today I Will:" : "That Day I Will:";
+
+    const wl = $("will-list");
+    wl.replaceChildren(...[0, 1, 2].map((i) => el("label", {}, "-",
+      el("input", { class: "line-input", id: `will-${i}`, value: rec.will[i] || "",
+        placeholder: ["Stay focused", "Block out distractions", "Be the person I want to become"][i],
+        "aria-label": `Intention ${i + 1}`,
+        oninput: (e) => { dayForWrite(selected).will[i] = e.target.value; save(true); } }))));
+    $("notes").value = rec.notes || "";
+  }
+
+  function renderStats() {
+    const p = monthProgress(view.y, view.m);
+    $("pct").textContent = `${p.pct}%`;
+    $("won").textContent = p.wonDays;
+    $("streak").textContent = streak();
+    if (document.activeElement !== $("reminder")) $("reminder").value = state.reminder;
+  }
+
+  // ---------- render: lies page ----------
+  function renderLies() {
+    const { y, m } = view, mk = monthKey(y, m);
+    $("lies-month").textContent = MONTHS[m];
+    $("lies-title").textContent = `${state.lies.length} Lies I Told Myself`;
+    const ul = $("list-lies");
+    ul.replaceChildren();
+    if (editing.lies) ul.append(...editRows("lies", "li"));
+    else {
+      const beaten = new Set(state.beaten[mk] || []);
+      state.lies.forEach((lie, i) => {
+        const on = beaten.has(lie.id);
+        ul.append(el("li", { class: on ? "beaten" : "" },
+          el("span", { class: "num", text: `${i + 1}.` }),
+          el("label", { style: "display:flex;gap:10px;align-items:center;cursor:pointer;min-width:0" },
+            el("input", { type: "checkbox", class: "box", checked: on, onchange: (e) => {
+              const set = new Set(state.beaten[mk] || []);
+              e.target.checked ? set.add(lie.id) : set.delete(lie.id);
+              state.beaten[mk] = [...set];
+              save(true); render();
+            } }),
+            el("span", { class: "name", text: lie.name }))));
+      });
+    }
+
+    const tl = $("list-truths");
+    tl.replaceChildren(...(editing.truths ? editRows("truths", "li") : state.truths.map((t) => el("li", { text: t.name }))));
+    $("reminder-copy").textContent = state.reminder;
+
+    const n = daysIn(y, m), nums = el("tr"), marks = el("tr");
+    for (let d = 1; d <= n; d++) {
+      const k = keyOf(y, m, d), cls = k === todayKey ? "today" : "";
+      nums.append(el("td", { class: cls, text: d }));
+      marks.append(el("td", { class: cls, text: won(k) ? "✗" : "", "aria-label": won(k) ? `Day ${d} won` : `Day ${d}` }));
+    }
+    $("won-row").replaceChildren(el("tbody", {}, nums, marks));
+    $("pct2").textContent = `${monthProgress(y, m).pct}%`;
+  }
+
+  function render() {
+    renderChecklist("habits", "list-habits", "nn-count");
+    renderChecklist("others", "list-others", "other-count");
+    renderTracker();
+    renderDay();
+    renderStats();
+    renderLies();
+    document.querySelectorAll("[data-edit]").forEach((b) => { b.textContent = editing[b.dataset.edit] ? "Done editing" : "Edit list"; });
+  }
+
+  // ---------- events ----------
+  document.querySelectorAll("[data-edit]").forEach((b) => b.addEventListener("click", () => {
+    const k = b.dataset.edit;
+    editing[k] = !editing[k];
+    if (!editing[k]) state[k] = state[k].filter((i) => i.name.trim());
+    save(true); render();
+  }));
+
+  $("reminder").addEventListener("input", (e) => { state.reminder = e.target.value; $("reminder-copy").textContent = state.reminder; save(true); });
+  $("notes").addEventListener("input", (e) => { dayForWrite(selected).notes = e.target.value; save(true); });
+
+  $("prev-month").addEventListener("click", () => { view.m--; if (view.m < 0) { view.m = 11; view.y--; } render(); });
+  $("next-month").addEventListener("click", () => { view.m++; if (view.m > 11) { view.m = 0; view.y++; } render(); });
+
+  function showPage(name) {
+    const lies = name === "lies";
+    $("page-system").hidden = lies;
+    $("page-lies").hidden = !lies;
+    $("tab-system").setAttribute("aria-selected", String(!lies));
+    $("tab-lies").setAttribute("aria-selected", String(lies));
+    try { history.replaceState(null, "", lies ? "#lies" : "#system"); } catch (e) { /* sandboxed */ }
+  }
+  $("tab-system").addEventListener("click", () => showPage("system"));
+  $("tab-lies").addEventListener("click", () => showPage("lies"));
+
+  // backup
+  document.querySelector(".backup").addEventListener("toggle", (e) => {
+    if (e.target.open) $("backup-text").value = JSON.stringify(state);
+  });
+  $("btn-copy").addEventListener("click", () => {
+    const ta = $("backup-text");
+    ta.value = JSON.stringify(state);
+    const fallback = () => { ta.focus(); ta.select(); toast("Selected: press Ctrl+C / Cmd+C to copy"); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).then(() => toast("Backup copied"), fallback);
+    } else fallback();
+  });
+  $("btn-restore").addEventListener("click", () => {
+    try {
+      const data = JSON.parse($("backup-text").value);
+      if (!data || !Array.isArray(data.habits) || typeof data.days !== "object") throw new Error("shape");
+      state = Object.assign(freshState(), data);
+      save(true); render(); toast("Notebook restored");
+    } catch (e) {
+      toast("That text isn't a backup from this notebook");
+    }
+  });
+  let resetArmed = false;
+  $("btn-reset").addEventListener("click", (e) => {
+    if (!resetArmed) {
+      resetArmed = true;
+      e.target.textContent = "Tap again to erase all days";
+      setTimeout(() => { resetArmed = false; e.target.textContent = "Erase everything"; }, 4000);
+      return;
+    }
+    resetArmed = false;
+    e.target.textContent = "Erase everything";
+    state = freshState(); selected = todayKey;
+    save(true); render(); toast("Started a fresh notebook");
+  });
+
+  // roll over to the new day if the tab stays open past midnight
+  setInterval(() => {
+    const n = new Date(), k = keyOf(n.getFullYear(), n.getMonth(), n.getDate());
+    if (k !== todayKey) {
+      const wasToday = selected === todayKey;
+      now = n; todayKey = k;
+      if (wasToday) { selected = k; view.y = n.getFullYear(); view.m = n.getMonth(); }
+      render();
+    }
+  }, 60000);
+
+  render();
+  showPage(location.hash === "#lies" ? "lies" : "system");
+})();
+</script>
+<!-- page:end -->
+</html>

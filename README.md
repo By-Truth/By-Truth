@@ -21,3 +21,7 @@ I turn ideas into live, working products — from front-end storefronts to full-
 ## Get in touch
 
 - Website: [bytruthltd.com](https://bytruthltd.com)
+
+## Discipline System
+
+[`discipline-system/`](discipline-system/) is a notebook-style habit tracker: daily non-negotiables, a monthly habit grid, daily intentions and reflections, and a "30 lies I told myself" page. It is a single HTML file with no build step, and it saves to the browser's local storage. Open `discipline-system/index.html`, or enable GitHub Pages to use it at `/discipline-system/`.
