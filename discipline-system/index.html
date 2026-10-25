@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-paper="lined" data-tone="white" data-pen="blue" data-font="patrick">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Discipline System</title>
+<meta name="description" content="A notebook-style discipline system: daily non-negotiables, habit tracker, routines, goals, focus timer and journal. Works offline on your phone.">
+<meta name="theme-color" content="#d6d7d4">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Discipline">
+<link rel="preload" href="fonts/patrick-hand.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/architects-daughter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script>
+  // Apply the saved notebook style before first paint so the page doesn't flash.
+  try {
+    var s = JSON.parse(localStorage.getItem("discipline-system-v2") || "{}").style;
+    if (s) for (var k in s) document.documentElement.setAttribute("data-" + k, s[k]);
+  } catch (e) {}
+</script>
+</head>
+<body>
+<div class="book">
+  <nav class="nav" id="nav" aria-label="Pages"></nav>
+  <main class="page" id="page">
+    <noscript>This app needs JavaScript turned on.</noscript>
+  </main>
+</div>
+<div class="more-menu" id="more-menu" hidden></div>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+<script src="js/core.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
